@@ -2,7 +2,8 @@ pipeline {
     environment {
 	    dockerRegistry = "dtr.nagarro.com:443"
 	    userName = "varunmehta02"
-	    BRANCH_NAME = "master"
+	    BRANCH_NAME = buildEnv
+        gitrepo = "https://github.com/Mehtavarun/Spring-Sample.git"
   	}
 
     agent any
@@ -22,7 +23,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 
-                checkout([$class: 'GitSCM', branches: [[name: "*/${buildEnv}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '69231027-d87e-4cbb-a81f-4cbd673533d1', url: 'https://git.nagarro.com/NAGP/varunmehta02.git/']]])
+                checkout([$class: 'GitSCM', branches: [[name: "*/${buildEnv}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '69231027-d87e-4cbb-a81f-4cbd673533d1', url: gitrepo]]])
 
             }
         }
