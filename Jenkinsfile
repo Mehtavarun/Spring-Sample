@@ -78,7 +78,7 @@ pipeline {
         stage('Push to DTR') {
             steps {
 
-                    bat "docker push ${dockerRegistry}/i_${userName}_${BRANCH_NAME}:${Build_NUMBER}"
+                    // bat "docker push ${dockerRegistry}/i_${userName}_${BRANCH_NAME}:${Build_NUMBER}"
                     
             }
         }
@@ -99,7 +99,7 @@ pipeline {
         stage('Helm Deployment'){
 			steps {
 
-				bat "helm upgrade --install nagp-helm-chart-${userName} nagp-helm-chart-${userName} --set imageName=dtr.nagarro.com:443/i_${userName}_${BRANCH_NAME}:${BUILD_NUMBER}"
+				// bat "helm upgrade --install nagp-helm-chart-${userName} nagp-helm-chart-${userName} --set imageName=dtr.nagarro.com:443/i_${userName}_${BRANCH_NAME}:${BUILD_NUMBER}"
 			
 			}
 		}
