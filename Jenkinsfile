@@ -72,7 +72,7 @@ pipeline {
         stage('Create Docker Image') {
             steps {
                 
-                    bat "docker build -t ${dockerRegistry}/i_${userName}_${BRANCH_NAME}:${Build_NUMBER} --no-cache -f Dockerfile ."
+                    bat "docker build -t ${dockerRegistry}/i_${userName}_${BRANCH_NAME}.toLowerCase():${Build_NUMBER} --no-cache -f Dockerfile ."
                 
             }
         }
