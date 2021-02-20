@@ -72,7 +72,7 @@ pipeline {
         stage('Create Docker Image') {
             steps {
                 
-                    bat "docker build -t ${dockerRegistry}/i_${userName}_${BRANCH_NAME}.toLowerCase():${Build_NUMBER} --no-cache -f Dockerfile ."
+                    bat "docker build -t ${dockerRegistry}/i_${userName}_${BRANCH_NAME.toLowerCase()}:${Build_NUMBER} --no-cache -f Dockerfile ."
                 
             }
         }
@@ -86,14 +86,14 @@ pipeline {
         stage('Stop and Remove Container') {
             steps {
                 
-                bat "docker ps -aq --filter \"name=c_${userName}_${BRANCH_NAME}\" | (findstr . && docker stop c_${userName}_${BRANCH_NAME} && docker rm -fv c_${userName}_${BRANCH_NAME}) || echo No Container Running with name c_${userName}_${BRANCH_NAME}"
+                bat "docker ps -aq --filter \"name=c_${userName}_${BRANCH_NAME.toLowerCase()}\" | (findstr . && docker stop c_${userName}_${BRANCH_NAME.toLowerCase()} && docker rm -fv c_${userName}_${BRANCH_NAME.toLowerCase()}) || echo No Container Running with name c_${userName}_${BRANCH_NAME.toLowerCase()}"
                 
             }
         }
         stage('Run New Container') {
             steps {
                 
-                bat "docker run -d --name c_${userName}_${BRANCH_NAME} -p 6200:8080 ${dockerRegistry}/i_${userName}_${BRANCH_NAME}:${Build_NUMBER}"
+                bat "docker run -d --name c_${userName}_${BRANCH_NAME.toLowerCase()} -p 6200:8080 ${dockerRegistry}/i_${userName}_${BRANCH_NAME.toLowerCase()}:${Build_NUMBER}"
                 
             }
         }
