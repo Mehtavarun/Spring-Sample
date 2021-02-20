@@ -2,7 +2,7 @@ pipeline {
     environment {
 	    dockerRegistry = "dtr.nagarro.com:443"
 	    userName = "varunmehta02"
-	    BRANCH_NAME = buildEnv
+	    BRANCH_NAME = ${buildEnv}
         gitrepo = "https://github.com/Mehtavarun/Spring-Sample.git"
   	}
 
