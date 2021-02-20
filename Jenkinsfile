@@ -22,7 +22,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 
-                checkout scm
+                checkout([$class: 'GitSCM', branches: [[name: "*/${buildEnv}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '69231027-d87e-4cbb-a81f-4cbd673533d1', url: 'https://git.nagarro.com/NAGP/varunmehta02.git/']]])
 
             }
         }
@@ -75,13 +75,13 @@ pipeline {
                 
             }
         }
-        stage('Push to DTR') {
-            steps {
+        // stage('Push to DTR') {
+        //     steps {
 
-                    // bat "docker push ${dockerRegistry}/i_${userName}_${BRANCH_NAME}:${Build_NUMBER}"
+        //             bat "docker push ${dockerRegistry}/i_${userName}_${BRANCH_NAME}:${Build_NUMBER}"
                     
-            }
-        }
+        //     }
+        // }
         stage('Stop and Remove Container') {
             steps {
                 
@@ -96,12 +96,12 @@ pipeline {
                 
             }
         }
-        stage('Helm Deployment'){
-			steps {
+        // stage('Helm Deployment'){
+		// 	steps {
 
-				// bat "helm upgrade --install nagp-helm-chart-${userName} nagp-helm-chart-${userName} --set imageName=dtr.nagarro.com:443/i_${userName}_${BRANCH_NAME}:${BUILD_NUMBER}"
+		// 		bat "helm upgrade --install nagp-helm-chart-${userName} nagp-helm-chart-${userName} --set imageName=dtr.nagarro.com:443/i_${userName}_${BRANCH_NAME}:${BUILD_NUMBER}"
 			
-			}
-		}
+		// 	}
+		// }
     }
 }
