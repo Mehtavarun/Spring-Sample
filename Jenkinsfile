@@ -1,6 +1,6 @@
 def getPortOnEnv(BRANCH_NAME) {
 	if (BRANCH_NAME == 'P-Test') {
-                retutn 6200
+                return 6200
             } else {
                 return 6000
             }
