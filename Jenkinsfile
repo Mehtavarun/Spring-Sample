@@ -1,14 +1,17 @@
+def getPortOnEnv() {
+	if (BRANCH_NAME == 'P-Test') {
+                retutn 6200
+            } else {
+                return 6000
+            }
+}
 pipeline {
     environment {
 	    dockerRegistry = "dtr.nagarro.com:443"
             gitrepo = "https://github.com/Mehtavarun/Spring-Sample.git"
 	    userName = "varunmehta02"
 	    BRANCH_NAME = "${buildEnv}"
-            if (BRANCH_NAME == 'P-Test') {
-                PORT = 6200
-            } else {
-                PORT = 6000
-            }
+            PORT = getPortOnEnv();
   	}
 
     agent any
