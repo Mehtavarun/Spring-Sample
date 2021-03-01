@@ -1,5 +1,5 @@
 def getPortOnEnv(BRANCH_NAME) {
-	if (BRANCH_NAME == 'P-Test') {
+	if (BRANCH_NAME == 'D-Test') {
                 return 6200
             } else {
                 return 6000
@@ -31,7 +31,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 
-                checkout([$class: 'GitSCM', branches: [[name: "*/${buildEnv}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '69231027-d87e-4cbb-a81f-4cbd673533d1', url: 'https://git.nagarro.com/NAGP/varunmehta02.git/']]])
+                checkout([$class: 'GitSCM', branches: [[name: "*/${buildEnv}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '69231027-d87e-4cbb-a81f-4cbd673533d1', url: gitrepo]]])
 
             }
         }
