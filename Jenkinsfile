@@ -1,4 +1,4 @@
-def getPortOnEnv() {
+def getPortOnEnv(BRANCH_NAME) {
 	if (BRANCH_NAME == 'P-Test') {
                 retutn 6200
             } else {
@@ -11,7 +11,7 @@ pipeline {
             gitrepo = "https://github.com/Mehtavarun/Spring-Sample.git"
 	    userName = "varunmehta02"
 	    BRANCH_NAME = "${buildEnv}"
-            PORT = getPortOnEnv();
+            PORT = getPortOnEnv(BRANCH_NAME);
   	}
 
     agent any
