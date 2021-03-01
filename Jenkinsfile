@@ -30,7 +30,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                
+		    print("${PORT}")
+		    print("${buildEnv}")
                 checkout([$class: 'GitSCM', branches: [[name: "*/${buildEnv}"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '69231027-d87e-4cbb-a81f-4cbd673533d1', url: gitrepo]]])
 
             }
