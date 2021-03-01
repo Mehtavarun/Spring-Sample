@@ -1,9 +1,14 @@
 pipeline {
     environment {
 	    dockerRegistry = "dtr.nagarro.com:443"
+            gitrepo = "https://github.com/Mehtavarun/Spring-Sample.git"
 	    userName = "varunmehta02"
 	    BRANCH_NAME = "${buildEnv}"
-        gitrepo = "https://github.com/Mehtavarun/Spring-Sample.git"
+            if (BRANCH_NAME == 'P-Test') {
+                PORT = 6200
+            } else {
+                PORT = 6000
+            }
   	}
 
     agent any
@@ -56,8 +61,8 @@ pipeline {
                 rtMavenDeployer(
                     id: 'deployer',
                     serverId: '123456789@artifactory',
-                    releaseRepo: 'CI-Automation-JAVA',
-                    snapshotRepo: 'CI-Automation-JAVA'
+                    releaseRepo: 'CI-Automation-JAVA1',
+                    snapshotRepo: 'CI-Automation-JAVA1'
                     )
                 rtMavenRun(
                     pom: 'pom.xml',
@@ -93,7 +98,7 @@ pipeline {
         stage('Run New Container') {
             steps {
                 
-                bat "docker run -d --name c_${userName}_${BRANCH_NAME.toLowerCase()} -p 6200:8080 ${dockerRegistry}/i_${userName}_${BRANCH_NAME.toLowerCase()}:${Build_NUMBER}"
+		    bat "docker run -d --name c_${userName}_${BRANCH_NAME.toLowerCase()} -p ${PORT}:8080 ${dockerRegistry}/i_${userName}_${BRANCH_NAME.toLowerCase()}:${Build_NUMBER}"
                 
             }
         }
